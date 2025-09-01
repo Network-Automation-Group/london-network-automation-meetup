@@ -5,77 +5,380 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Network Automation Group</title>
     <style>
-      body {
-          font-family: Arial, sans-serif;
-          background-color: #1a1a1a;
-          color: white;
+      * {
           margin: 0;
           padding: 0;
-          text-align: center;
+          box-sizing: border-box;
+      }
+
+      body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #16213e 100%);
+          color: white;
+          line-height: 1.6;
+          overflow-x: hidden;
+      }
+
+      /* Header Section */
+      .header {
           min-height: 100vh;
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: center;
+          text-align: center;
+          padding: 2rem;
+          position: relative;
+      }
+
+      .header::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: radial-gradient(circle at 50% 50%, rgba(0, 188, 212, 0.1) 0%, transparent 50%);
+          z-index: -1;
       }
 
       .logo {
-          max-width: 300px;
-          height: auto;
-          margin-bottom: 30px;
-          animation: glow 2s ease-in-out infinite alternate;
+          width: 200px;
+          height: 200px;
+          margin-bottom: 2rem;
+          animation: float 6s ease-in-out infinite;
+          filter: drop-shadow(0 0 30px rgba(0, 188, 212, 0.5));
+          transition: transform 0.3s ease;
+      }
+
+      .logo:hover {
+          transform: scale(1.05);
+          filter: drop-shadow(0 0 40px rgba(0, 188, 212, 0.8));
+      }
+
+      @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+      }
+
+      .main-title {
+          font-size: 3.5rem;
+          font-weight: 700;
+          background: linear-gradient(45deg, #00bcd4, #0de4ef, #00acc1);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          margin-bottom: 1.5rem;
+          animation: glow 3s ease-in-out infinite alternate;
       }
 
       @keyframes glow {
-          from { filter: drop-shadow(0 0 10px #00bcd4); }
-          to { filter: drop-shadow(0 0 20px #00bcd4); }
+          from { text-shadow: 0 0 20px rgba(0, 188, 212, 0.5); }
+          to { text-shadow: 0 0 30px rgba(0, 188, 212, 0.8); }
       }
 
-      h1 {
-          color: #00bcd4;
-          font-size: 2.5em;
-          margin-bottom: 20px;
-          text-shadow: 0 0 10px #00bcd4;
-      }
-
-      p {
-          font-size: 1.2em;
+      .subtitle {
+          font-size: 1.3rem;
           max-width: 600px;
-          line-height: 1.6;
-          margin-bottom: 30px;
+          margin-bottom: 3rem;
+          color: #e0e0e0;
+          opacity: 0.9;
       }
 
-      .content {
-          max-width: 800px;
-          padding: 20px;
+      .cta-button {
+          background: linear-gradient(45deg, #00bcd4, #0de4ef);
+          color: white;
+          padding: 15px 40px;
+          border: none;
+          border-radius: 50px;
+          font-size: 1.1rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          text-decoration: none;
+          display: inline-block;
+          box-shadow: 0 5px 20px rgba(0, 188, 212, 0.3);
       }
 
+      .cta-button:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(0, 188, 212, 0.5);
+      }
+
+      /* Services Section */
+      .services {
+          padding: 5rem 2rem;
+          max-width: 1200px;
+          margin: 0 auto;
+      }
+
+      .section-title {
+          text-align: center;
+          font-size: 2.5rem;
+          color: #00bcd4;
+          margin-bottom: 3rem;
+          position: relative;
+      }
+
+      .section-title::after {
+          content: '';
+          width: 100px;
+          height: 3px;
+          background: linear-gradient(45deg, #00bcd4, #0de4ef);
+          position: absolute;
+          bottom: -10px;
+          left: 50%;
+          transform: translateX(-50%);
+      }
+
+      .services-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 2rem;
+          margin-top: 4rem;
+      }
+
+      .service-card {
+          background: rgba(255, 255, 255, 0.05);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(0, 188, 212, 0.3);
+          border-radius: 15px;
+          padding: 2rem;
+          text-align: center;
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+      }
+
+      .service-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(0, 188, 212, 0.1), transparent);
+          transition: left 0.5s ease;
+      }
+
+      .service-card:hover::before {
+          left: 100%;
+      }
+
+      .service-card:hover {
+          transform: translateY(-5px);
+          border-color: rgba(0, 188, 212, 0.6);
+          box-shadow: 0 10px 30px rgba(0, 188, 212, 0.2);
+      }
+
+      .service-icon {
+          font-size: 3rem;
+          color: #00bcd4;
+          margin-bottom: 1rem;
+      }
+
+      .service-title {
+          font-size: 1.4rem;
+          color: #00bcd4;
+          margin-bottom: 1rem;
+      }
+
+      .service-description {
+          color: #e0e0e0;
+          opacity: 0.9;
+      }
+
+      /* Contact Section */
       .contact {
-          margin-top: 40px;
-          padding: 20px;
-          border: 1px solid #00bcd4;
-          border-radius: 10px;
-          background-color: rgba(0, 188, 212, 0.1);
+          background: rgba(0, 188, 212, 0.1);
+          padding: 4rem 2rem;
+          text-align: center;
+          margin: 3rem 0;
+          border-top: 1px solid rgba(0, 188, 212, 0.3);
+          border-bottom: 1px solid rgba(0, 188, 212, 0.3);
+      }
+
+      .contact h3 {
+          font-size: 2rem;
+          color: #00bcd4;
+          margin-bottom: 1rem;
+      }
+
+      .contact p {
+          font-size: 1.1rem;
+          color: #e0e0e0;
+          max-width: 500px;
+          margin: 0 auto;
+      }
+
+      /* Footer */
+      .footer {
+          text-align: center;
+          padding: 2rem;
+          color: #888;
+          border-top: 1px solid rgba(0, 188, 212, 0.2);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+          .main-title {
+              font-size: 2.5rem;
+          }
+
+          .subtitle {
+              font-size: 1.1rem;
+              padding: 0 1rem;
+          }
+
+          .logo {
+              width: 150px;
+              height: 150px;
+          }
+
+          .services-grid {
+              grid-template-columns: 1fr;
+              gap: 1.5rem;
+          }
+      }
+
+      /* Particle effect */
+      .particles {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: -1;
       }
     </style>
   </head>
   <body>
-    <div class="content">
+    <div class="particles"></div>
+
+    <section class="header">
       <img src="./logo.jpeg" alt="Network Automation Group Logo" class="logo" />
-
-      <h1>Network Automation Group</h1>
-
-      <p>
-        Welcome to the Network Automation Group - where intelligent automation
-        meets network engineering excellence. We bridge the gap between
-        traditional networking and modern automation technologies.
+      <h1 class="main-title">Network Automation Group</h1>
+      <p class="subtitle">
+        A collaborative community of network engineers, developers, and
+        automation enthusiasts. Join us as we share knowledge, learn together,
+        and advance network automation practices.
       </p>
+      <a href="#community" class="cta-button">Join Our Community</a>
+    </section>
 
-      <div class="contact">
-        <h3>Get In Touch</h3>
-        <p>Contact us to learn more about our network automation solutions.</p>
-        <!-- Add your contact information here -->
+    <section class="services" id="community">
+      <h2 class="section-title">Why Join Our Community?</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">👥</div>
+          <h3 class="service-title">Collaborative Learning</h3>
+          <p class="service-description">
+            Connect with like-minded network automation enthusiasts, share
+            experiences, and learn from each other's successes and challenges.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">📚</div>
+          <h3 class="service-title">Knowledge Sharing</h3>
+          <p class="service-description">
+            Access shared resources, tutorials, scripts, and best practices
+            contributed by community members from around the world.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🚀</div>
+          <h3 class="service-title">Skill Development</h3>
+          <p class="service-description">
+            Participate in workshops, hackathons, and collaborative projects to
+            enhance your network automation skills and career growth.
+          </p>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <section class="services">
+      <h2 class="section-title">Get Involved</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">💬</div>
+          <h3 class="service-title">Join Discussions</h3>
+          <p class="service-description">
+            Participate in our forums, chat channels, and monthly meetups to
+            discuss the latest trends in network automation and share your
+            insights.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🤝</div>
+          <h3 class="service-title">Contribute Projects</h3>
+          <p class="service-description">
+            Collaborate on open-source projects, share your automation scripts,
+            and help build tools that benefit the entire community.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🎓</div>
+          <h3 class="service-title">Learn & Teach</h3>
+          <p class="service-description">
+            Attend workshops, webinars, and study groups. Share your expertise
+            by mentoring newcomers or leading technical sessions.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact">
+      <h3>Ready to Get Involved?</h3>
+      <p>
+        Join our growing community of network automation enthusiasts. Whether
+        you're just starting out or an experienced professional, there's a place
+        for you here!
+      </p>
+    </section>
+
+    <footer class="footer">
+      <p>&copy; 2025 Network Automation Group. All rights reserved.</p>
+    </footer>
+
+    <script>
+      // Simple particle effect
+      function createParticles() {
+        const particles = document.querySelector('.particles');
+        const particleCount = 50;
+
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement('div');
+          particle.style.position = 'absolute';
+          particle.style.width = '2px';
+          particle.style.height = '2px';
+          particle.style.backgroundColor = '#00bcd4';
+          particle.style.borderRadius = '50%';
+          particle.style.opacity = Math.random() * 0.5;
+          particle.style.left = Math.random() * 100 + '%';
+          particle.style.top = Math.random() * 100 + '%';
+          particle.style.animation = `twinkle ${
+            2 + Math.random() * 3
+          }s infinite`;
+          particles.appendChild(particle);
+        }
+      }
+
+      // Add twinkling animation
+      const style = document.createElement('style');
+      style.textContent = `
+            @keyframes twinkle {
+                0%, 100% { opacity: 0; }
+                50% { opacity: 0.5; }
+            }
+        `;
+      document.head.appendChild(style);
+
+      createParticles();
+    </script>
   </body>
 </html>
