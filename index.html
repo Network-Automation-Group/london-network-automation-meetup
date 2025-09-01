@@ -43,26 +43,27 @@
       }
 
       .logo {
-          width: 200px;
-          height: 200px;
-          margin-bottom: 2rem;
+          width: 320px;
+          height: 320px;
+          margin-bottom: 3rem;
           animation: float 6s ease-in-out infinite;
-          filter: drop-shadow(0 0 30px rgba(0, 188, 212, 0.5));
-          transition: transform 0.3s ease;
+          filter: drop-shadow(0 0 40px rgba(0, 188, 212, 0.6));
+          transition: all 0.3s ease;
+          background: none;
       }
 
       .logo:hover {
-          transform: scale(1.05);
-          filter: drop-shadow(0 0 40px rgba(0, 188, 212, 0.8));
+          transform: scale(1.08);
+          filter: drop-shadow(0 0 60px rgba(0, 188, 212, 0.9));
       }
 
       @keyframes float {
           0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
+          50% { transform: translateY(-15px); }
       }
 
       .main-title {
-          font-size: 3.5rem;
+          font-size: 4rem;
           font-weight: 700;
           background: linear-gradient(45deg, #00bcd4, #0de4ef, #00acc1);
           -webkit-background-clip: text;
@@ -78,31 +79,32 @@
       }
 
       .subtitle {
-          font-size: 1.3rem;
-          max-width: 600px;
+          font-size: 1.4rem;
+          max-width: 700px;
           margin-bottom: 3rem;
           color: #e0e0e0;
           opacity: 0.9;
+          line-height: 1.8;
       }
 
       .cta-button {
           background: linear-gradient(45deg, #00bcd4, #0de4ef);
           color: white;
-          padding: 15px 40px;
+          padding: 18px 45px;
           border: none;
           border-radius: 50px;
-          font-size: 1.1rem;
+          font-size: 1.2rem;
           font-weight: 600;
           cursor: pointer;
           transition: all 0.3s ease;
           text-decoration: none;
           display: inline-block;
-          box-shadow: 0 5px 20px rgba(0, 188, 212, 0.3);
+          box-shadow: 0 8px 25px rgba(0, 188, 212, 0.4);
       }
 
       .cta-button:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 25px rgba(0, 188, 212, 0.5);
+          transform: translateY(-3px);
+          box-shadow: 0 12px 30px rgba(0, 188, 212, 0.6);
       }
 
       /* Services Section */
@@ -222,22 +224,33 @@
       /* Responsive Design */
       @media (max-width: 768px) {
           .main-title {
-              font-size: 2.5rem;
+              font-size: 2.8rem;
           }
 
           .subtitle {
-              font-size: 1.1rem;
+              font-size: 1.2rem;
               padding: 0 1rem;
           }
 
           .logo {
-              width: 150px;
-              height: 150px;
+              width: 250px;
+              height: 250px;
           }
 
           .services-grid {
               grid-template-columns: 1fr;
               gap: 1.5rem;
+          }
+      }
+
+      @media (max-width: 480px) {
+          .logo {
+              width: 200px;
+              height: 200px;
+          }
+
+          .main-title {
+              font-size: 2.2rem;
           }
       }
 
@@ -257,7 +270,7 @@
     <div class="particles"></div>
 
     <section class="header">
-      <img src="./logo.jpeg" alt="Network Automation Group Logo" class="logo" />
+      <img src="./logo.png" alt="Network Automation Group Logo" class="logo" />
       <h1 class="main-title">Network Automation Group</h1>
       <p class="subtitle">
         A collaborative community of network engineers, developers, and
