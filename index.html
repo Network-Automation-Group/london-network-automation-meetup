@@ -150,6 +150,39 @@
           fill: currentColor;
       }
 
+      .social-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .meetup-button {
+          background: linear-gradient(45deg, #E51937, #F64060);
+          color: white;
+          padding: 18px 30px;
+          border: none;
+          border-radius: 50px;
+          font-size: 1.1rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          box-shadow: 0 8px 25px rgba(229, 25, 55, 0.4);
+          min-width: 200px;
+      }
+
+      .meetup-button:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 12px 30px rgba(229, 25, 55, 0.6);
+          background: linear-gradient(45deg, #D0162E, #E8394F);
+      }
+
       /* Services Section */
       .services {
           padding: 5rem 2rem;
@@ -333,19 +366,34 @@
         and advance network automation practices.
       </p>
       <div class="cta-buttons">
-        <a
-          href="https://join.slack.com/t/net-automation-group/shared_invite/zt-3cghvqiqd-iFUk6_CH~3NCW1hEDyt2bg"
-          class="slack-button"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <svg class="slack-icon" viewBox="0 0 24 24">
-            <path
-              d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"
-            />
-          </svg>
-          Join us on Slack
-        </a>
+        <div class="social-buttons">
+          <a
+            href="https://join.slack.com/t/net-automation-group/shared_invite/zt-3cghvqiqd-iFUk6_CH~3NCW1hEDyt2bg"
+            class="slack-button"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg class="slack-icon" viewBox="0 0 24 24">
+              <path
+                d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"
+              />
+            </svg>
+            Join us on Slack
+          </a>
+          <a
+            href="https://www.meetup.com/london-network-automation-meetup/"
+            class="meetup-button"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg class="meetup-icon" viewBox="0 0 24 24">
+              <path
+                d="M6.98 8.125c0 .995-.681 1.65-1.636 1.65-.892 0-1.636-.655-1.636-1.65 0-.996.744-1.651 1.636-1.651.955 0 1.636.655 1.636 1.651zm11.26 4.875c-.995 0-1.636-.656-1.636-1.651s.641-1.65 1.636-1.65c.892 0 1.636.655 1.636 1.65s-.744 1.651-1.636 1.651zm-4.907-2.813c-.892 0-1.635-.655-1.635-1.65 0-.996.743-1.651 1.635-1.651.995 0 1.636.655 1.636 1.651 0 .995-.641 1.65-1.636 1.65zm-6.531 0c-.892 0-1.635-.655-1.635-1.65 0-.996.743-1.651 1.635-1.651.995 0 1.636.655 1.636 1.651 0 .995-.641 1.65-1.636 1.65zm2.906 2.938c-1.308 0-2.176-.831-2.176-1.963 0-1.133.868-1.963 2.176-1.963s2.176.83 2.176 1.963c0 1.132-.868 1.963-2.176 1.963z"
+              />
+            </svg>
+            London Meetup
+          </a>
+        </div>
         <a href="#community" class="cta-button"
           >Learn More About Our Community</a
         >
