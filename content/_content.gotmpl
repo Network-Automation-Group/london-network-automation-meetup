@@ -1,0 +1,19 @@
+{{ .EnableAllLanguages }}
+
+{{/* About page removed - using custom /content/about.md instead */}}
+
+{{/* Create empty sponsors page (template: `layouts/miscellaneous/sponsors`). */}}
+{{ $content := dict
+    "mediaType" "text/markdown"
+}}
+{{ $page := dict
+    "content" $content
+    "kind" "page"
+    "path" "sponsors"
+    "title" "Sponsors"
+    "type" "miscellaneous"
+    "layout" "sponsors"
+}}
+{{ .AddPage $page }}
+
+{{/* Location page removed - using custom /content/location.md instead */}}

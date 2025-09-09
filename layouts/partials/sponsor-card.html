@@ -1,0 +1,33 @@
+{{ $input := . }}
+
+
+<div class="sponsor-card">
+    <a class="sponsor-card__link" href="{{ $input.companyUrl }}">
+        {{ if hasPrefix $input.logoResource "http" }}
+            {{/* External URL - use directly */}}
+            <img
+                class="sponsor-card__logo"
+                src="{{ $input.logoResource }}"
+                alt="{{ $input.name }}" />
+        {{ else }}
+            {{/* Local file - check assets first, then fallback to static */}}
+            {{ $resource := resources.Get $input.logoResource }}
+            {{ if $resource }}
+                {{/* Found in assets/ directory */}}
+                <img
+                    class="sponsor-card__logo"
+                    src="{{ $resource.RelPermalink }}"
+                    alt="{{ $input.name }}"
+                    {{ if not (eq $resource.MediaType.SubType "svg") }}
+                        width="{{ $resource.Width }}" height="{{ $resource.Height }}"
+                    {{ end }} />
+            {{ else }}
+                {{/* Not found in assets, assume it's in static/ */}}
+                <img
+                    class="sponsor-card__logo"
+                    src="{{ $input.logoResource | relURL }}"
+                    alt="{{ $input.name }}" />
+            {{ end }}
+        {{ end }}
+    </a>
+</div>
