@@ -1,0 +1,122 @@
+baseURL: 'https://networkautomation.group/'
+languageCode: 'en-us'
+title: 'London Network Automation Meetup'
+
+theme: event
+sectionPagesMenu: main
+defaultContentLanguage: en
+
+languages:
+  _merge: deep
+  en:
+    languageName: English
+    disabled: false
+
+    menus:
+      main:
+        - identifier: sessions
+          pageRef: /sessions
+          weight: 10
+        - identifier: speakers
+          pageRef: /speakers
+          weight: 20
+        - identifier: sponsors
+          pageRef: /sponsors
+          weight: 30
+        - identifier: location
+          pageRef: /location
+          weight: 40
+        - identifier: about
+          pageRef: /about
+          weight: 50
+
+      footer:
+        - identifier: code_of_conduct
+          pageRef: /code-of-conduct
+          weight: 50
+          params:
+            description: |
+              Learn more about our mission, values, and the people behind our organization.
+              The "About Us" page provides insights into who we are, what we do,
+              and why we're passionate about our work.
+
+    params:
+      themes:
+        event:
+          slogan: ""
+          description: |
+            The London Network Automation Meetup (LNAM) is a volunteer-run meetup focused
+            on hosting periodic meetups in London focused around network automation.
+          # aboutUs: "https://www.linkedin.com/company/london-network-automation-meetup/"
+
+
+params:
+  contact:
+    email: lnam@networkautomation.group
+  themes:
+    event:
+      title: "London Network Automation Meetup"
+      sessionizeId: "veiahmfo"
+
+      shortTitle: "LNAM"
+      startDate: 2025-10-09
+      endDate: 2025-10-09
+      location: "London, UK"
+      address:
+          - AWS Experience
+          - 60 Holborn Viaduct
+          - London EC1A 2FD
+          - United Kingdom
+      map:
+        # 👇 Get an embeddable map URL from OpenStreetMap
+        # 👇 https://wiki.openstreetmap.org/wiki/Export#Embeddable_HTML
+        # 👇 or Google Maps
+        # 👇 https://developers.google.com/maps/documentation/embed/embedding-map
+        # 👇 and enter it here.
+        embeddableMapUrl: https://maps.app.goo.gl/C29jkcDcuAyGbWDm7
+        # 👇 Enter a URL of a larger map representation (not required for Google Maps).
+        # viewLargerMapUrl:
+      callToAction:
+        # eventbrite:
+        #   # 👇 Get your Eventbrite event ID from the URL of your event page
+        #   # 👇 and enter it here.
+        #   eventId:
+        other:
+          # 👇 Enter the URL of your ticket shop here.
+          url: https://www.meetup.com/london-network-automation-meetup/events/310820780/?eventOrigin=group_upcoming_events
+        enableBanner: false
+      socialLinks:
+        # xUrl:
+        # facebookUrl:
+        linkedinUrl: https://www.linkedin.com/company/london-network-automation-meetup/
+      favicon: favicon.ico
+      images:
+        logo: logos/lnam.png
+        titleBackground: images/background.png
+        # 👇 Image showcasing the building or venue where the event will take place.
+        location: https://assets.aboutamazon.com/dims4/default/c8d7186/2147483647/strip/true/crop/5464x8192+0+0/resize/496x743!/format/webp/quality/90/?url=https%3A%2F%2Famazon-blogs-brightspot.s3.amazonaws.com%2F9d%2Fba%2F469dd8ed42ac9aadef53302e7b24%2Flondon-stock-image-shoot-lhr16.jpg
+      sponsors:
+        - logo: aws.png
+          url: https://aws.amazon.com/
+          # 👇 This name is used as the alt text for the logo
+          name: AWS
+      # partners:
+      #   - logo:
+      #     url:
+      #     # 👇 This name is used as the alt text for the logo
+      #     name:
+      # 👇 List of Sessionize speaker IDs of speakers that organize the event.
+      organizers: pete-crocker
+      # # 👇 List of Sessionize session IDs of highlight sessions.
+      # featuredSessions:
+      colors:
+          primaryLighter: '#327EB0'
+          primary: '#327EB0'
+          primaryDarker: '#216490'
+          primaryDarkest: '#216490'
+          secondary: '#A8ACB0'
+          secondaryDarker: '#A8ACB0'
+          track: '#015a57'
+          shadow: '#a6afc366'
+      # # 👇 Name of the category in Sessionize that is used to group sessions.
+      # trackCategoryTitle: Track
