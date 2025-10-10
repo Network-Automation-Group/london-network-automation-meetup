@@ -59,8 +59,8 @@ params:
       sessionizeId: "veiahmfo"
 
       shortTitle: "LNAM"
-      startDate: 2025-10-09
-      endDate: 2025-10-09
+      startDate: 2026-01-29
+      endDate: 2026-01-29
       location: "London, UK"
       address:
           - AWS Experience
@@ -83,7 +83,7 @@ params:
         #   eventId:
         other:
           # 👇 Enter the URL of your ticket shop here.
-          url: https://www.meetup.com/london-network-automation-meetup/events/310820780/?eventOrigin=group_upcoming_events
+          url: https://app.hi.events/event/3241/london-network-automation-meetup-1769709600
         enableBanner: false
       socialLinks:
         # xUrl:
