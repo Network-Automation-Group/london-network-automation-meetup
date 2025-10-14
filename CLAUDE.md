@@ -8,7 +8,7 @@ This is a Hugo static site for the London Network Automation Meetup (LNAM) using
 
 **Key Details:**
 
-- Event Date: October 9, 2025
+- Next Event: January 29, 2026
 - Venue: AWS Experience, 60 Holborn Viaduct, London
 - Sessionize ID: `veiahmfo`
 - Live URL: https://networkautomation.group/
@@ -34,22 +34,32 @@ hugo --minify --baseURL "https://networkautomation.group/"
 # Install theme dependencies
 cd themes/event && npm install
 
-# Run theme tests
+# Run theme tests (Playwright end-to-end tests)
 cd themes/event && npx playwright test
 
-# Lint theme code
+# Run Playwright tests with UI
+cd themes/event && npx playwright test --ui
+
+# Lint theme code (ESLint with Prettier)
 cd themes/event && npx eslint --fix
+
+# Format theme code
+cd themes/event && npx prettier --write .
 ```
 
 ## Architecture
 
 ### Hugo Site Structure
 
-- **Root hugo.yaml**: Main site configuration with event details, menus, and theme parameters
+- **hugo.yaml**: Main site configuration with event details, menus, and theme parameters
 - **themes/event/**: Complete Hugo Event theme (no longer a submodule - converted to regular files)
-- **content/**: Event-specific content pages
-- **static/**: Static assets (logos, images)
-- **layouts/**: Custom layout overrides for the theme
+  - Contains theme assets, layouts, styles, tests (playwright.config.ts), and linting config (eslint.config.js)
+- **content/**: Event-specific markdown pages (about.md, code-of-conduct.md, location.md)
+- **assets/**: Site-specific assets (logos/lnam.png, images/background.png) - processed by Hugo pipelines
+- **static/**: Static files served as-is (aws.png sponsor logo, favicon.ico, slack.png)
+- **layouts/**: Custom layout overrides for the theme (partials/, _default/, sessions/)
+- **data/**: Empty - dynamic data fetched from Sessionize API during build
+- **i18n/**: Internationalization overrides (currently en.yaml)
 
 ### Theme Integration
 
@@ -74,30 +84,40 @@ params:
 
 **Content Generation:**
 
-- Theme fetches data from Sessionize API during hugo build
-- Creates `/sessions/`, `/speakers/` pages automatically
-- Organizer info pulled from `organizers: pete-crocker` setting
+- Theme fetches data from Sessionize API during `hugo` build
+- Creates `/sessions/`, `/speakers/`, `/schedule/` pages automatically
+- Organizer info pulled from `organizers: pete-crocker` setting in hugo.yaml
+- No local data files needed - all event data comes from Sessionize
 
 ### Deployment
 
 - **GitHub Actions**: `.github/workflows/hugo.yml` deploys to GitHub Pages
 - **Build triggers**: Push to main branch, manual workflow dispatch
-- **Hugo version**: Currently pinned to v0.128.0 in CI
+- **Hugo version**: Pinned to v0.128.0 (extended version) in CI
+- **Automatic rebuilds**: Consider scheduling rebuilds to sync latest Sessionize changes
 
 ## Important Notes
 
-### Submodule Cleanup
+### Updating Event Details
 
-The `themes/event` directory was previously a git submodule but has been converted to regular files. All submodule references have been cleaned up.
+**For a new event, update these settings in hugo.yaml:**
+- `params.themes.event.sessionizeId` - Sessionize event ID
+- `params.themes.event.startDate` and `endDate`
+- `params.themes.event.callToAction.other.url` - Ticket registration URL
+- Event address and map details
 
-### Content Updates
-
-Since the site pulls data from Sessionize, content updates happen by:
-1. Updating the Sessionize event
-2. Rebuilding the site (automatic via GitHub Actions)
+**Session/speaker content updates:**
+Since the site pulls data from Sessionize API, content updates happen by:
+1. Updating the Sessionize event (sessions, speakers, schedule)
+2. Rebuilding the site (automatic via GitHub Actions on push, or manual trigger)
 
 ### Theme Customization
 
-- Colors and branding configured in `hugo.yaml`
-- Custom layouts can be added to root `layouts/` to override theme defaults
-- Theme-specific assets in `themes/event/assets/`
+- **Colors**: Configured in `hugo.yaml` under `params.themes.event.colors`
+- **Logos and assets**: Place in `assets/` directory (processed by Hugo) or `static/` (served as-is)
+- **Custom layouts**: Add to root `layouts/` to override theme defaults
+- **Menus**: Configured in `hugo.yaml` under `languages.en.menus`
+
+### Submodule History
+
+The `themes/event` directory was previously a git submodule but has been converted to regular files. All submodule references have been cleaned up.
