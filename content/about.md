@@ -4,7 +4,7 @@ The London Network Automation Meetup (LNAM) is a volunteer-run meetup focused on
 
 ## History
 
-The London Network Automation Meetup was first organized in 2017 by [Csilla Bessenyei](https://www.linkedin.com/in/csilla-bessenyei-4114663b/) and had 14 meetups before taking a hiatus in 2022.  
+The London Network Automation Meetup was first organized in 2017 by [Csilla Bessenyei](https://www.linkedin.com/in/csilla-bessenyei-4114663b/) and had 14 meetups before taking a hiatus in 2022.
 
 A new team of volunteers has resurrected the meetup in 2025.
 
