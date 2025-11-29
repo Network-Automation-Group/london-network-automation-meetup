@@ -1,6 +1,18 @@
 {{ .EnableAllLanguages }}
 
-{{/* About page removed - using custom /content/about.md instead */}}
+{{/* Create empty about us page (template: `layouts/miscellaneous/about`). */}}
+{{ $content := dict
+    "mediaType" "text/markdown"
+}}
+{{ $page := dict
+    "content" $content
+    "kind" "page"
+    "path" "about"
+    "title" "About Us"
+    "type" "miscellaneous"
+    "layout" "about"
+}}
+{{ .AddPage $page }}
 
 {{/* Create empty sponsors page (template: `layouts/miscellaneous/sponsors`). */}}
 {{ $content := dict
@@ -16,4 +28,16 @@
 }}
 {{ .AddPage $page }}
 
-{{/* Location page removed - using custom /content/location.md instead */}}
+{{/* Create empty location page (template: `layouts/miscellaneous/location`). */}}
+{{ $content := dict
+    "mediaType" "text/markdown"
+}}
+{{ $page := dict
+    "content" $content
+    "kind" "page"
+    "path" "location"
+    "title" "Location"
+    "type" "miscellaneous"
+    "layout" "location"
+}}
+{{ .AddPage $page }}

@@ -47,7 +47,34 @@ languages:
           description: |
             The London Network Automation Meetup (LNAM) is a volunteer-run meetup focused
             on hosting periodic meetups in London focused around network automation.
-          # aboutUs: "https://www.linkedin.com/company/london-network-automation-meetup/"
+          aboutUs: |
+            The London Network Automation Meetup (LNAM) is a volunteer-run meetup focused on hosting periodic meetups in London focused around network automation.
+
+            ## History
+
+            The London Network Automation Meetup was first organized in 2017 by [Csilla Bessenyei](https://www.linkedin.com/in/csilla-bessenyei-4114663b/) and had 14 meetups before taking a hiatus in 2022.
+
+            A new team of volunteers has resurrected the meetup in 2025.
+
+            ## Organisers
+
+            The London Network Automation Meetup is a volunteer-run meetup and organised by:
+
+            - [Rick Donato](https://www.linkedin.com/in/rick-donato/)
+            - [Andy Taylor](https://www.linkedin.com/in/ataylor/)
+            - [Pete Crocker](https://www.linkedin.com/in/petercrocker/)
+            - [Suresh Vina](https://www.linkedin.com/in/suresh-vina-282545a9/)
+            - [Gary Woodward](https://www.linkedin.com/in/gary-woodward-b865199/)
+            - [Suhaib Saeed](https://www.linkedin.com/in/suhaibsaeed/)
+          directions: |
+            **From Liverpool Street Station** (closest, ~3 min walk):
+            Walk north on Bishopsgate, turn left onto Worship Street. Principal Place is on your right.
+
+            **From Old Street Station** (~5 min walk):
+            Exit onto Old Street, walk south on Curtain Road, turn right onto Worship Street.
+
+            **From Moorgate Station** (~8 min walk):
+            Walk north on Moorgate, continue onto South Place, then left onto Appold Street which becomes Worship Street.
 
 
 params:
@@ -73,9 +100,8 @@ params:
         # 👇 or Google Maps
         # 👇 https://developers.google.com/maps/documentation/embed/embedding-map
         # 👇 and enter it here.
-        embeddableMapUrl: https://maps.app.goo.gl/C29jkcDcuAyGbWDm7
-        # 👇 Enter a URL of a larger map representation (not required for Google Maps).
-        # viewLargerMapUrl:
+        embeddableMapUrl: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.8984686498!2d-0.1074!3d51.5174!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761b4ea63e23a1%3A0x9d5d8bfaa7b1b8e8!2s60%20Holborn%20Viaduct%2C%20London%20EC1A%202FD!5e0!3m2!1sen!2suk!4v1701234567890
+        viewLargerMapUrl: https://maps.app.goo.gl/C29jkcDcuAyGbWDm7
       callToAction:
         # eventbrite:
         #   # 👇 Get your Eventbrite event ID from the URL of your event page
@@ -94,12 +120,17 @@ params:
         logo: logos/lnam.png
         titleBackground: images/background.png
         # 👇 Image showcasing the building or venue where the event will take place.
-        location: https://assets.aboutamazon.com/dims4/default/c8d7186/2147483647/strip/true/crop/5464x8192+0+0/resize/496x743!/format/webp/quality/90/?url=https%3A%2F%2Famazon-blogs-brightspot.s3.amazonaws.com%2F9d%2Fba%2F469dd8ed42ac9aadef53302e7b24%2Flondon-stock-image-shoot-lhr16.jpg
+        location: images/location.jpg
       sponsors:
         - logo: aws.png
           url: https://aws.amazon.com/
-          # 👇 This name is used as the alt text for the logo
           name: AWS
+        - logo: opsmill.svg
+          url: https://opsmill.com/
+          name: OpsMill
+        - logo: packetcoders.png
+          url: https://www.packetcoders.io/
+          name: Packet Coders
       # partners:
       #   - logo:
       #     url:
