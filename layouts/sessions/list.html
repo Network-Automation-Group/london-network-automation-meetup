@@ -1,6 +1,6 @@
 {{- define "main" }}
     {{- $scheduledSessionPages := where .Pages "Params.isScheduled" true }}
-    {{- $sessionsGroupedByDay := $scheduledSessionPages.GroupByParamDate "date" "2006-01-02" "asc" }}
+    {{- $allGroupedByDay := $scheduledSessionPages.GroupByParamDate "date" "2006-01-02" "asc" }}
     {{- $sessionsGroupedByTrack := $scheduledSessionPages.GroupByParam "track" }}
     {{- $sessionTrackIndices := dict }}
     {{- range $index, $element := $sessionsGroupedByTrack }}
@@ -8,119 +8,156 @@
     {{- end }}
     {{- $sectionResources := .Resources }}
 
-    {{- range $index, $element := $sessionsGroupedByDay }}
-        <input
-            name="filter-day"
-            type="radio"
-            class="session-filter-input"
-            value="day-{{ $index }}"
-            id="filter-day-{{ $index }}"
-            {{- if eq $index 0 }}
-                checked
-            {{- end }} />
+    {{- /* Get today's start of day for comparison */ -}}
+    {{- $todayStr := now.Format "2006-01-02" }}
+    {{- $today := time $todayStr }}
+
+    {{- /* Separate day groups into upcoming and past */ -}}
+    {{- $upcomingDays := slice }}
+    {{- $pastDays := slice }}
+    {{- range $allGroupedByDay }}
+        {{- $dayDate := time .Key }}
+        {{- if ge $dayDate.Unix $today.Unix }}
+            {{- $upcomingDays = $upcomingDays | append . }}
+        {{- else }}
+            {{- $pastDays = $pastDays | append . }}
+        {{- end }}
     {{- end }}
 
-    {{- range $index, $element := $sessionsGroupedByTrack }}
-        <input
-            name="filter-track"
-            type="checkbox"
-            class="session-filter-input"
-            value="track-{{ $index }}"
-            id="filter-track-{{ $index }}"
-            checked />
+    {{- /* Reverse past days to show most recent first */ -}}
+    {{- $pastDaysReversed := slice }}
+    {{- range seq (sub (len $pastDays) 1) 0 }}
+        {{- $pastDaysReversed = $pastDaysReversed | append (index $pastDays .) }}
     {{- end }}
-
 
     <header class="section-container">
         <div class="section">
             <h1 class="heading heading--1">{{ T "sessions_page.heading" }}</h1>
-            <div class="session-list-filters">
-                {{- if gt ($sessionsGroupedByDay | len) 1 }}
-                    <article class="session-list-filter">
-                        <h2 class="session-list-filter__heading">
-                            {{ T "sessions_page.heading_day_filter" }}
-                        </h2>
-                        <menu class="session-list-filter__menu">
-                            {{- range $index, $element := $sessionsGroupedByDay }}
-                                <li role="presentation">
-                                    <label class="session-list-filter__label" for="filter-day-{{ $index }}">
-                                        {{ T "sessions_page.day" (add $index 1) }}
-                                    </label>
-                                </li>
-                            {{- end }}
-                        </menu>
-                    </article>
-                {{- end }}
-
-                {{- if gt ($sessionsGroupedByTrack | len) 1 }}
-                    <article class="session-list-filter">
-                        <h2 class="session-list-filter__heading">
-                            {{- T "sessions_page.heading_track_filter" }}
-                        </h2>
-                        <menu class="session-list-filter__menu">
-                            {{- range $index, $element := $sessionsGroupedByTrack }}
-                                <li role="presentation">
-                                    <label class="session-list-filter__label" for="filter-track-{{ $index }}">
-                                        #{{- $element.Key | upper }}
-                                    </label>
-                                </li>
-                            {{- end }}
-                        </menu>
-                    </article>
-                {{- end }}
-            </div>
         </div>
     </header>
 
-    <!-- Changed from section-container--dimmed to plain section-container for white background -->
-    <div class="section-container">
-        {{- range $index, $element := $sessionsGroupedByDay }}
-            <section class="section session-day-section" data-day="{{ $index }}">
-                <h1 class="heading heading--highlighted">
-                    {{ T "sessions_page.day" (add $index 1) }}
-                </h1>
-                <h2 class="heading heading--2">
-                    {{ .Key | time.Format ":date_long" }}
-                </h2>
-                {{- range .Pages.GroupByParamDate "startsAt" "2006-01-02T15:04:00" "asc" }}
-                    <h3 class="heading heading--3 session-day-section__hour-heading">
-                        {{ .Key | time.Format ":time_short" }}
-                    </h3>
-                    <menu class="session-day-section__session-menu">
-                        {{- range .Pages }}
-                            {{- $page := . }}
-                            <li
-                                role="presentation"
-                                {{- if .Params.track }}
-                                    data-track="{{ (index $sessionTrackIndices .Params.track) }}"
-                                {{- end }}>
-                                {{- $transformedSpeakers := slice }}
-                                {{- range .Params.speakers }}
-                                    {{- $speakerAvatarResource := ($sectionResources.GetMatch (printf "avatar-%s-%s.*" $page.Params.sessionId .id)) }}
-                                    {{- $transformedSpeakers = $transformedSpeakers | append (
+    {{- /* Upcoming Events Section */ -}}
+    {{- if gt (len $upcomingDays) 0 }}
+        <div class="section-container">
+            <div class="section">
+                <h2 class="heading heading--2" style="margin-bottom: 1rem;">Upcoming Events</h2>
+            </div>
+        </div>
+        <div class="section-container section-container--dimmed">
+            {{- range $upcomingDays }}
+                <section class="section session-day-section">
+                    <h2 class="heading heading--2">
+                        {{ .Key | time.Format ":date_long" }}
+                    </h2>
+                    {{- range .Pages.GroupByParamDate "startsAt" "2006-01-02T15:04:00" "asc" }}
+                        <h3 class="heading heading--3 session-day-section__hour-heading">
+                            {{ .Key | time.Format ":time_short" }}
+                        </h3>
+                        <menu class="session-day-section__session-menu">
+                            {{- range .Pages }}
+                                {{- $page := . }}
+                                <li
+                                    role="presentation"
+                                    {{- if .Params.track }}
+                                        data-track="{{ (index $sessionTrackIndices .Params.track) }}"
+                                    {{- end }}>
+                                    {{- $transformedSpeakers := slice }}
+                                    {{- range .Params.speakers }}
+                                        {{- $speakerAvatarResource := ($sectionResources.GetMatch (printf "avatar-%s-%s.*" $page.Params.sessionId .id)) }}
+                                        {{- $transformedSpeakers = $transformedSpeakers | append (
+                                            dict
+                                            "name" .fullName
+                                            "avatarResource" $speakerAvatarResource
+                                            )
+                                        }}
+                                    {{- end }}
+                                    {{- partial "event-row.html" (
                                         dict
-                                        "name" .fullName
-                                        "avatarResource" $speakerAvatarResource
+                                        "track" .Params.track
+                                        "title" .Title
+                                        "link" .RelPermalink
+                                        "speakers" $transformedSpeakers
+                                        "isServiceSession" .Params.isServiceSession
+                                        "room" .Params.room.name
+                                        "categories" .Params.categories
                                         )
                                     }}
-                                {{- end }}
-                                {{- partial "event-row.html" (
-                                    dict
-                                    "track" .Params.track
-                                    "title" .Title
-                                    "link" .RelPermalink
-                                    "speakers" $transformedSpeakers
-                                    "isServiceSession" .Params.isServiceSession
-                                    "room" .Params.room.name
-                                    "categories" .Params.categories
-                                    )
-                                }}
-                            </li>
-                        {{- end }}
-                    </menu>
-                {{- end }}
-            </section>
-        {{ else }}
+                                </li>
+                            {{- end }}
+                        </menu>
+                    {{- end }}
+                </section>
+            {{- end }}
+        </div>
+    {{- else }}
+        <div class="section-container">
+            <div class="section nothing-scheduled-section">
+                <h2 class="heading heading--2 heading--centered nothing-scheduled-section__heading">
+                    No upcoming events scheduled
+                </h2>
+                <p class="heading--centered">Check back soon for our next meetup!</p>
+            </div>
+        </div>
+    {{- end }}
+
+    {{- /* Past Events Section */ -}}
+    {{- if gt (len $pastDays) 0 }}
+        <div class="section-container">
+            <div class="section">
+                <h2 class="heading heading--2" style="margin-top: 2rem; margin-bottom: 1rem;">Past Events</h2>
+            </div>
+        </div>
+        <div class="section-container">
+            {{- range $pastDaysReversed }}
+                <section class="section session-day-section">
+                    <h2 class="heading heading--2">
+                        {{ .Key | time.Format ":date_long" }}
+                    </h2>
+                    {{- range .Pages.GroupByParamDate "startsAt" "2006-01-02T15:04:00" "asc" }}
+                        <h3 class="heading heading--3 session-day-section__hour-heading">
+                            {{ .Key | time.Format ":time_short" }}
+                        </h3>
+                        <menu class="session-day-section__session-menu">
+                            {{- range .Pages }}
+                                {{- $page := . }}
+                                <li
+                                    role="presentation"
+                                    {{- if .Params.track }}
+                                        data-track="{{ (index $sessionTrackIndices .Params.track) }}"
+                                    {{- end }}>
+                                    {{- $transformedSpeakers := slice }}
+                                    {{- range .Params.speakers }}
+                                        {{- $speakerAvatarResource := ($sectionResources.GetMatch (printf "avatar-%s-%s.*" $page.Params.sessionId .id)) }}
+                                        {{- $transformedSpeakers = $transformedSpeakers | append (
+                                            dict
+                                            "name" .fullName
+                                            "avatarResource" $speakerAvatarResource
+                                            )
+                                        }}
+                                    {{- end }}
+                                    {{- partial "event-row.html" (
+                                        dict
+                                        "track" .Params.track
+                                        "title" .Title
+                                        "link" .RelPermalink
+                                        "speakers" $transformedSpeakers
+                                        "isServiceSession" .Params.isServiceSession
+                                        "room" .Params.room.name
+                                        "categories" .Params.categories
+                                        )
+                                    }}
+                                </li>
+                            {{- end }}
+                        </menu>
+                    {{- end }}
+                </section>
+            {{- end }}
+        </div>
+    {{- end }}
+
+    {{- /* Show placeholder only if no sessions at all */ -}}
+    {{- if and (eq (len $upcomingDays) 0) (eq (len $pastDays) 0) }}
+        <div class="section-container">
             <div class="section nothing-scheduled-section">
                 <h1 class="heading heading--highlighted heading--centered nothing-scheduled-section__heading">
                     {{ T "sessions_page.heading_no_sessions" }}
@@ -128,13 +165,10 @@
                 <h2 class="heading heading--2 heading--centered nothing-scheduled-section__heading">
                     {{ T "sessions_page.heading_come_back_soon" }}
                 </h2>
-
                 <div class="nothing-scheduled-section__placeholder">
                     {{- partial "graphics/no-content.html" }}
                 </div>
             </div>
-        {{ end }}
-    </div>
-
-    {{- /* Removed the CTA section completely */ -}}
+        </div>
+    {{- end }}
 {{- end }}
