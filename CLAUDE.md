@@ -8,10 +8,9 @@ This is a Hugo static site for the London Network Automation Meetup (LNAM) using
 
 **Key Details:**
 
-- Next Event: January 29, 2026
-- Venue: AWS Experience, 60 Holborn Viaduct, London
-- Sessionize ID: `veiahmfo`
-- Live URL: https://networkautomation.group/
+- Live URL: <https://networkautomation.group/>
+- Sessionize ID: `veiahmfo` (configured in hugo.yaml)
+- Hugo version: 0.128.0 (extended)
 
 ## Commands
 
@@ -34,10 +33,13 @@ hugo --minify --baseURL "https://networkautomation.group/"
 # Install theme dependencies
 cd themes/event && npm install
 
-# Run theme tests (Playwright end-to-end tests)
+# Run all Playwright end-to-end tests
 cd themes/event && npx playwright test
 
-# Run Playwright tests with UI
+# Run a single test file
+cd themes/event && npx playwright test tests/session-page.spec.ts
+
+# Run tests with UI for debugging
 cd themes/event && npx playwright test --ui
 
 # Lint theme code (ESLint with Prettier)
@@ -82,6 +84,8 @@ params:
       callToAction: {...}      # Registration/ticket links
 ```
 
+See `themes/event/hugo.yaml` for all available configuration options and their defaults.
+
 **Content Generation:**
 
 - Theme fetches data from Sessionize API during `hugo` build
@@ -115,9 +119,5 @@ Since the site pulls data from Sessionize API, content updates happen by:
 
 - **Colors**: Configured in `hugo.yaml` under `params.themes.event.colors`
 - **Logos and assets**: Place in `assets/` directory (processed by Hugo) or `static/` (served as-is)
-- **Custom layouts**: Add to root `layouts/` to override theme defaults
+- **Layout overrides**: Files in root `layouts/` override theme defaults (e.g., `layouts/partials/social-links.html` overrides `themes/event/layouts/partials/social-links.html`)
 - **Menus**: Configured in `hugo.yaml` under `languages.en.menus`
-
-### Submodule History
-
-The `themes/event` directory was previously a git submodule but has been converted to regular files. All submodule references have been cleaned up.
