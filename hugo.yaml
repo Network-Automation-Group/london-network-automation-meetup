@@ -95,31 +95,18 @@ params:
           - London EC1A 2FD
           - United Kingdom
       map:
-        # 👇 Get an embeddable map URL from OpenStreetMap
-        # 👇 https://wiki.openstreetmap.org/wiki/Export#Embeddable_HTML
-        # 👇 or Google Maps
-        # 👇 https://developers.google.com/maps/documentation/embed/embedding-map
-        # 👇 and enter it here.
         embeddableMapUrl: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.8984686498!2d-0.1074!3d51.5174!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761b4ea63e23a1%3A0x9d5d8bfaa7b1b8e8!2s60%20Holborn%20Viaduct%2C%20London%20EC1A%202FD!5e0!3m2!1sen!2suk!4v1701234567890
         viewLargerMapUrl: https://maps.app.goo.gl/C29jkcDcuAyGbWDm7
       callToAction:
-        # eventbrite:
-        #   # 👇 Get your Eventbrite event ID from the URL of your event page
-        #   # 👇 and enter it here.
-        #   eventId:
         other:
-          # 👇 Enter the URL of your ticket shop here.
           url: https://app.hi.events/event/3241/london-network-automation-meetup-1769709600
         enableBanner: false
       socialLinks:
-        # xUrl:
-        # facebookUrl:
         linkedinUrl: https://www.linkedin.com/company/london-network-automation-meetup/
       favicon: favicon.ico
       images:
         logo: logos/lnam.png
         titleBackground: images/background.png
-        # 👇 Image showcasing the building or venue where the event will take place.
         location: images/location.jpg
       sponsors:
         - logo: aws.png
@@ -131,15 +118,7 @@ params:
         - logo: packetcoders.png
           url: https://www.packetcoders.io/
           name: Packet Coders
-      # partners:
-      #   - logo:
-      #     url:
-      #     # 👇 This name is used as the alt text for the logo
-      #     name:
-      # 👇 List of Sessionize speaker IDs of speakers that organize the event.
       organizers: pete-crocker
-      # # 👇 List of Sessionize session IDs of highlight sessions.
-      # featuredSessions:
       colors:
           primaryLighter: '#327EB0'
           primary: '#327EB0'
@@ -149,5 +128,3 @@ params:
           secondaryDarker: '#A8ACB0'
           track: '#015a57'
           shadow: '#a6afc366'
-      # # 👇 Name of the category in Sessionize that is used to group sessions.
-      # trackCategoryTitle: Track
