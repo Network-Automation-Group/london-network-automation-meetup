@@ -86,20 +86,20 @@ params:
       sessionizeId: "veiahmfo"
 
       shortTitle: "LNAM"
-      startDate: 2026-01-29
-      endDate: 2026-01-29
+      startDate: 2027-01-20
+      endDate: 2027-01-20
       location: "London, UK"
       address:
-          - AWS Experience
-          - 60 Holborn Viaduct
-          - London EC1A 2FD
+          - Civo Tech Junction
+          - 32-37 Cowper Street
+          - London EC2A 4AW
           - United Kingdom
       map:
-        embeddableMapUrl: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.8984686498!2d-0.1074!3d51.5174!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761b4ea63e23a1%3A0x9d5d8bfaa7b1b8e8!2s60%20Holborn%20Viaduct%2C%20London%20EC1A%202FD!5e0!3m2!1sen!2suk!4v1701234567890
-        viewLargerMapUrl: https://maps.app.goo.gl/C29jkcDcuAyGbWDm7
+        embeddableMapUrl: https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1sCivo+Tech+Junction,+32-37+Cowper+Street,+London+EC2A+4AW!6i16
+        viewLargerMapUrl: https://www.google.com/maps/search/?api=1&query=Civo%20Tech%20Junction%2C%2032-37%20Cowper%20Street%2C%20London%20EC2A%204AW
       callToAction:
         other:
-          url: https://app.hi.events/event/3241/london-network-automation-meetup-1769709600
+          url: https://app.hi.events/event/11703/lnam-20271
         enableBanner: false
       socialLinks:
         linkedinUrl: https://www.linkedin.com/company/london-network-automation-meetup/
