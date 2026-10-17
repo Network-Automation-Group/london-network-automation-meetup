@@ -24,18 +24,6 @@
         </li>
     {{ end }}
 
-    {{- if $input.slackUrl }}
-        <li class="social-links__menu-item">
-            <a
-                href="{{- $input.slackUrl }}"
-                aria-label="Slack"
-                target="_blank"
-                rel="noopener noreferrer external"
-                class="social-links__link {{ $input.linkClass }}">
-                {{- partial "graphics/social/slack.html" }}
-            </a>
-        </li>
-    {{ end }}
 
     {{- if $input.xUrl }}
         <li class="social-links__menu-item">

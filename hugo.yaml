@@ -104,7 +104,6 @@ params:
         enableBanner: false
       socialLinks:
         linkedinUrl: https://www.linkedin.com/company/london-network-automation-meetup/
-        slackUrl: https://join.slack.com/t/net-automation-group/shared_invite/zt-3d1tvc1x2-emU7MwZbYU6~zNLbwE~rPA
       favicon: favicon.ico
       images:
         logo: logos/lnam.png

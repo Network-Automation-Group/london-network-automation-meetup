@@ -57,8 +57,8 @@ cd themes/event && npx prettier --write .
 - **themes/event/**: Complete Hugo Event theme (no longer a submodule - converted to regular files)
   - Contains theme assets, layouts, styles, tests (playwright.config.ts), and linting config (eslint.config.js)
 - **content/**: Event-specific markdown pages (about.md, code-of-conduct.md, location.md)
-- **assets/**: Site-specific assets (logos/lnam.png, images/background.png) - processed by Hugo pipelines
-- **static/**: Static files served as-is (sponsor logos, favicon.ico, slack.png, fonts/ with self-hosted Geist and Geist Mono)
+- **assets/**: Site-specific assets (logos/lnam.png, images/location.jpg, styles/) - processed by Hugo pipelines
+- **static/**: Static files served as-is (sponsor logos, favicon.ico, fonts/ with self-hosted Geist and Geist Mono)
 - **layouts/**: Custom layout overrides for the theme (partials/, _default/, sessions/)
 - **data/**: Empty - dynamic data fetched from Sessionize API during build
 - **i18n/**: Internationalization overrides (currently en.yaml)

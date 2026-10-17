@@ -11,14 +11,6 @@
         </div>
 
         <ul class="lnam-community__links">
-            {{- with $input.socialLinks.slackUrl }}
-                <li>
-                    <a class="lnam-community__link" href="{{ . }}" target="_blank" rel="noopener noreferrer external">
-                        <span class="lnam-community__icon">{{ partial "graphics/social/slack.html" }}</span>
-                        {{ T "community.slack" }}
-                    </a>
-                </li>
-            {{- end }}
             {{- with $input.socialLinks.linkedinUrl }}
                 <li>
                     <a class="lnam-community__link" href="{{ . }}" target="_blank" rel="noopener noreferrer external">

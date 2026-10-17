@@ -25,7 +25,6 @@ past_meetups.heading: Previous meetups
 past_meetups.all: All sessions
 
 community.eyebrow: Community
-community.heading: Join the conversation
-community.text: Talk network automation between meetups on Slack, and follow LNAM on LinkedIn for meetup announcements.
-community.slack: Join us on Slack
+community.heading: Stay in touch
+community.text: Follow LNAM on LinkedIn for meetup announcements, or email the organisers.
 community.linkedin: Follow on LinkedIn
