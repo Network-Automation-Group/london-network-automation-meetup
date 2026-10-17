@@ -1,0 +1,64 @@
+{{- /*
+    Sponsors grouped by tier, in the order of params.themes.event.sponsorTiers.
+    Sponsors without a tier, or with a tier that is not listed, are shown last under "Sponsors".
+    Used by the home page (showHeading true) and the sponsors page.
+*/ -}}
+{{ $input := . }}
+
+{{- $validSponsors := slice }}
+{{- range $input.sponsors }}
+    {{- if and .logo .url }}
+        {{- $validSponsors = $validSponsors | append . }}
+    {{- end }}
+{{- end }}
+
+{{- $groups := slice }}
+{{- $tieredIds := slice }}
+{{- range $input.tiers }}
+    {{- $tierId := .id }}
+    {{- $tieredIds = $tieredIds | append $tierId }}
+    {{- $members := where $validSponsors "tier" $tierId }}
+    {{- if gt (len $members) 0 }}
+        {{- $groups = $groups | append (dict "id" $tierId "name" .name "sponsors" $members) }}
+    {{- end }}
+{{- end }}
+{{- $untiered := slice }}
+{{- range $validSponsors }}
+    {{- if not (in $tieredIds .tier) }}
+        {{- $untiered = $untiered | append . }}
+    {{- end }}
+{{- end }}
+{{- if gt (len $untiered) 0 }}
+    {{- $groups = $groups | append (dict "id" "other" "name" (T "sponsors_page.heading_sponsors") "sponsors" $untiered) }}
+{{- end }}
+
+{{- if gt (len $groups) 0 }}
+    <div class="section-container">
+        <section class="section section--long lnam-sponsors {{ if not $input.showHeading }}lnam-sponsors--page{{ end }}">
+            {{- if $input.showHeading }}
+                <header class="lnam-section-header lnam-section-header--centered">
+                    <div>
+                        <p class="lnam-eyebrow">{{ T "sponsors_section.heading" }}</p>
+                        <h2 class="heading heading--2 heading--embedded">{{ T "sponsors_section.subheading" }}</h2>
+                    </div>
+                </header>
+            {{- end }}
+
+            {{- range $groups }}
+                <div class="sponsor-tier sponsor-tier--{{ .id }}">
+                    <h3 class="sponsor-tier__label">
+                        <span class="sponsor-tier__marker" aria-hidden="true"></span>
+                        {{ .name }}
+                    </h3>
+                    <ul class="sponsor-tier__list">
+                        {{- range .sponsors }}
+                            <li class="sponsor-tier__item">
+                                {{- partial "sponsor-card.html" (dict "companyUrl" .url "logoResource" .logo "name" .name) }}
+                            </li>
+                        {{- end }}
+                    </ul>
+                </div>
+            {{- end }}
+        </section>
+    </div>
+{{- end }}

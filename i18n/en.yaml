@@ -1,3 +1,31 @@
 menu.imprint: Imprint
 menu.privacy: Privacy Policy
+menu.about: About
 # cta_banner.message: Get your free ticket now!
+
+hero.eyebrow: Next meetup
+hero.talks:
+    one: '{{ . }} talk'
+    other: '{{ . }} talks'
+hero.speakers:
+    one: '{{ . }} speaker'
+    other: '{{ . }} speakers'
+
+agenda.eyebrow: Agenda
+agenda.heading: What's on
+agenda.full_schedule: Full schedule
+agenda.empty: The agenda for the next meetup will be published here soon.
+
+sponsors_section.heading: Sponsors
+sponsors_section.subheading: Thank you to our sponsors
+sponsors_page.intro: LNAM is a volunteer-run meetup. Thank you to the companies that support it.
+
+past_meetups.eyebrow: Archive
+past_meetups.heading: Previous meetups
+past_meetups.all: All sessions
+
+community.eyebrow: Community
+community.heading: Join the conversation
+community.text: Talk network automation between meetups on Slack, and follow LNAM on LinkedIn for meetup announcements.
+community.slack: Join us on Slack
+community.linkedin: Follow on LinkedIn

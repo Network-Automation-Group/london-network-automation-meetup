@@ -2,7 +2,7 @@
 
 
 <div class="sponsor-card">
-    <a class="sponsor-card__link" href="{{ $input.companyUrl }}">
+    <a class="sponsor-card__link" href="{{ $input.companyUrl }}" target="_blank" rel="noopener external" aria-label="{{ $input.name }}">
         {{ if hasPrefix $input.logoResource "http" }}
             {{/* External URL - use directly */}}
             <img

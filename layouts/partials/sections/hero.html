@@ -1,0 +1,53 @@
+{{- /* Home page hero: logo, meetup title, date and venue, countdown and registration link. */ -}}
+{{ $input := . }}
+{{ $event := $input.event }}
+
+
+<div class="section-container lnam-hero">
+    <section class="section lnam-hero__content">
+        {{- with resources.Get $event.images.logo }}
+            {{- with .Resize "720x webp" }}
+                <img class="lnam-hero__logo" src="{{ .RelPermalink }}" width="360" height="360" alt="{{ $event.title }} logo" />
+            {{- end }}
+        {{- end }}
+
+        <div class="lnam-hero__text">
+            <p class="lnam-eyebrow">{{ T "hero.eyebrow" }}</p>
+            <h1 class="lnam-hero__title">{{ $event.title }}</h1>
+
+            <p class="lnam-hero__meta">
+                {{- with $event.startDate }}
+                    <time datetime="{{ . | time.AsTime | time.Format "2006-01-02" }}">
+                        {{- . | time.AsTime | time.Format "Monday 2 January 2006" -}}
+                    </time>
+                {{- end }}
+                {{- with $event.address }}
+                    <span class="lnam-hero__separator" aria-hidden="true">/</span>
+                    <a href="{{ (site.GetPage "location").RelPermalink }}">{{ index . 0 }}, {{ $event.location }}</a>
+                {{- end }}
+            </p>
+
+            {{- if and (gt $input.numberOfTalks 0) (gt $input.numberOfSpeakers 0) }}
+                <p class="lnam-hero__stats">
+                    {{ T "hero.talks" $input.numberOfTalks }}
+                    <span aria-hidden="true">·</span>
+                    {{ T "hero.speakers" $input.numberOfSpeakers }}
+                </p>
+            {{- end }}
+
+            <p class="lnam-hero__description">{{ $event.description | markdownify }}</p>
+
+            <div class="lnam-hero__actions">
+                {{- with $event.callToAction.other.url }}
+                    <a class="button lnam-button" href="{{ . }}" target="_blank" rel="noopener noreferrer external">
+                        {{ T "cta_button.get_ticket" }}
+                        <span class="button__icon">{{ partial "graphics/external-link.html" }}</span>
+                    </a>
+                {{- end }}
+                {{- with $event.startDate }}
+                    {{ partial "countdown.html" (dict "targetDate" .) }}
+                {{- end }}
+            </div>
+        </div>
+    </section>
+</div>

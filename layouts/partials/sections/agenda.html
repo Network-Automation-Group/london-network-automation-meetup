@@ -1,0 +1,43 @@
+{{- /* Agenda of the next meetup, one row per session ordered by start time. */ -}}
+{{ $input := . }}
+
+
+<div class="section-container section-container--dimmed">
+    <section class="section section--long lnam-agenda">
+        <header class="lnam-section-header">
+            <div>
+                <p class="lnam-eyebrow">{{ T "agenda.eyebrow" }}</p>
+                <h2 class="heading heading--2 heading--embedded">{{ T "agenda.heading" }}</h2>
+            </div>
+            <a class="lnam-text-link" href="{{ $input.scheduleUrl }}">{{ T "agenda.full_schedule" }} →</a>
+        </header>
+
+        {{- if gt (len $input.sessions) 0 }}
+            <ol class="lnam-agenda__list">
+                {{- range $input.sessions }}
+                    <li class="lnam-agenda__item {{ if .Params.isServiceSession }}lnam-agenda__item--service{{ end }}">
+                        <time class="lnam-agenda__time" datetime="{{ .Params.startsAt | time.Format "2006-01-02T15:04" }}">
+                            {{- .Params.startsAt | time.Format "15:04" -}}
+                        </time>
+                        <div class="lnam-agenda__body">
+                            {{- if .Params.isServiceSession }}
+                                <span class="lnam-agenda__title">{{ .Title }}</span>
+                            {{- else }}
+                                <a class="lnam-agenda__title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+                                {{- with .Params.speakers }}
+                                    <span class="lnam-agenda__speakers">
+                                        {{- range $index, $speaker := . }}
+                                            {{- if $index }}, {{ end }}{{ $speaker.fullName }}
+                                        {{- end -}}
+                                    </span>
+                                {{- end }}
+                            {{- end }}
+                        </div>
+                    </li>
+                {{- end }}
+            </ol>
+        {{- else }}
+            <p class="paragraph">{{ T "agenda.empty" }}</p>
+        {{- end }}
+    </section>
+</div>

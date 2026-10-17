@@ -4,6 +4,8 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="shortcut icon" href="{{ .Site.Params.themes.event.favicon | absURL }}" />
+        <link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | absURL }}" />
+        <meta name="theme-color" content="{{ .Site.Params.themes.event.colors.primary }}" />
 
         <title>
             {{- if .Title }}{{ .Title }} -{{ end }}
@@ -70,6 +72,7 @@
                         {{- partial "graphics/hamburger-menu.html" }}
                     </label>
                     <a class="page-header__title-link" href="{{ site.Home.RelPermalink }}">
+                        {{- partial "brand-mark.html" }}
                         {{ (strings.FirstUpper (or .Site.Params.themes.event.shortTitle .Site.Params.themes.event.title)) }}
                     </a>
 
@@ -103,7 +106,7 @@
                             {{- partial "social-links.html" (
                                 dict
                                 "linkedinUrl" .Site.Params.themes.event.socialLinks.linkedinUrl
-                                "slackUrl" "https://join.slack.com/t/net-automation-group/shared_invite/zt-3d1tvc1x2-emU7MwZbYU6~zNLbwE~rPA"
+                                "slackUrl" .Site.Params.themes.event.socialLinks.slackUrl
                                 "linkClass" "page-header__social-link"
                                 )
                             }}
@@ -145,6 +148,7 @@
                     {{- partial "social-links.html" (
                         dict
                         "linkedinUrl" .Site.Params.themes.event.socialLinks.linkedinUrl
+                        "slackUrl" .Site.Params.themes.event.socialLinks.slackUrl
                         "xUrl" .Site.Params.themes.event.socialLinks.xUrl
                         "facebookUrl" .Site.Params.themes.event.socialLinks.facebookUrl
                         "companyUrl" .Site.Params.themes.event.socialLinks.companyUrl
