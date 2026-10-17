@@ -31,6 +31,9 @@ languages:
           weight: 50
 
       footer:
+        - identifier: call_for_speakers
+          url: https://sessionize.com/london-network-automation-meetup/
+          weight: 40
         - identifier: code_of_conduct
           pageRef: /code-of-conduct
           weight: 50

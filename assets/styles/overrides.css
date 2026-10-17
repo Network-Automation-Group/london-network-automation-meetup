@@ -32,10 +32,6 @@
     color: var(--color-primary);
 }
 
-:root .lnam-eyebrow--inverted {
-    color: #8fb4ff;
-}
-
 :root .lnam-section-header {
     display: flex;
     flex-wrap: wrap;
@@ -111,16 +107,6 @@
 :root .brand-mark {
     width: 2.25rem;
     height: 2.25rem;
-}
-
-:root .page-header__social-link {
-    font-size: 1.25rem;
-    color: var(--lnam-muted);
-    transition: color 0.2s ease;
-}
-
-:root .page-header__social-link:hover {
-    color: var(--color-primary);
 }
 
 /* Solid primary buttons everywhere except on the blue sidebar. */
@@ -475,80 +461,161 @@
     color: var(--lnam-muted);
 }
 
-/* Community band */
+/* Speaker page */
 
-:root .lnam-community {
-    background: var(--color-primary-darkest);
-    color: #ffffff;
-}
-
-:root .lnam-community__content {
+:root .lnam-speaker {
     display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 3rem;
+    grid-template-columns: 20rem 1fr;
+    align-items: start;
+    gap: 3.5rem;
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
 }
 
-:root .lnam-community .heading {
-    color: #ffffff;
+:root .lnam-speaker__photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 1rem;
+    border: 1px solid var(--lnam-border);
 }
 
-:root .lnam-community__text {
-    max-width: 36rem;
+:root .lnam-speaker__tagline {
     margin: 1rem 0 0;
-    line-height: 1.6;
-    color: #c3cad6;
+    font-size: 1.125rem;
+    color: var(--lnam-muted);
 }
 
-:root .lnam-community__links {
-    margin: 0;
+:root .lnam-speaker__biography {
+    max-width: 42rem;
+    margin-top: 1.5rem;
+}
+
+:root .lnam-speaker__biography p {
+    margin: 0 0 1rem;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+}
+
+:root .lnam-speaker__biography a {
+    color: var(--color-primary);
+    overflow-wrap: anywhere;
+}
+
+:root .lnam-speaker__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1.75rem 0 0;
     padding: 0;
     list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
 }
 
-:root .lnam-community__link {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.875rem 1.25rem;
-    border: 1px solid #ffffff2e;
-    border-radius: 0.5rem;
-    color: #ffffff;
-    font-weight: 500;
-    text-decoration: none;
-    transition: background 0.2s ease;
-}
-
-:root .lnam-community__link:hover {
-    background: #ffffff14;
-}
-
-:root .lnam-community__icon {
+:root .lnam-speaker__link {
     display: inline-flex;
-    width: 1.125rem;
-    height: 1.125rem;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.875rem;
+    border: 1px solid var(--lnam-border);
+    border-radius: 0.5rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-primary-darkest);
+    text-decoration: none;
+    transition: border-color 0.2s ease;
 }
 
-:root .lnam-community__icon--text {
-    justify-content: center;
-    font-family: var(--font-mono);
-    line-height: 1.125rem;
+:root .lnam-speaker__link:hover {
+    border-color: var(--color-primary);
+}
+
+:root .lnam-speaker__icon {
+    display: inline-flex;
+    width: 1rem;
+    height: 1rem;
+    color: var(--color-primary);
+}
+
+:root .lnam-agenda__item.lnam-agenda__item--dated {
+    grid-template-columns: 7.5rem 1fr;
+}
+
+:root .lnam-agenda__item--dated .lnam-agenda__time {
+    white-space: nowrap;
+}
+
+/* Speaker cards on the speakers list */
+
+:root .speaker-card {
+    border: 1px solid var(--lnam-border);
+    border-radius: var(--lnam-radius);
+    box-shadow: none;
+    transition: border-color 0.2s ease;
+}
+
+:root .speaker-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: none;
+}
+
+:root .speaker-card .heading {
+    font-size: 1.125rem;
 }
 
 /* Footer */
 
 :root .page-footer-section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
     border-top: 1px solid var(--lnam-border);
+}
+
+:root .page-footer-section__start {
+    font-size: 1rem;
+}
+
+:root .lnam-footer__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-family: var(--font-mono);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-primary-darkest);
+    text-decoration: none;
+}
+
+:root .footer-menu {
+    margin: 0;
+    gap: 2rem;
+}
+
+:root .footer-menu__link {
+    font-size: 0.9375rem;
+}
+
+:root .lnam-footer__actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+:root .lnam-footer__social-link {
+    font-size: 1.375rem;
+    color: var(--lnam-muted);
+    transition: color 0.2s ease;
+}
+
+:root .lnam-footer__social-link:hover {
+    color: var(--color-primary);
 }
 
 /* Narrow screens */
 
 @media (width <= 768px) {
-    :root .lnam-hero__content,
-    :root .lnam-community__content {
+    :root .lnam-hero__content {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
@@ -560,6 +627,16 @@
 
     :root .lnam-hero__logo {
         width: 11rem;
+    }
+
+    :root .lnam-speaker {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding-top: 2rem;
+    }
+
+    :root .lnam-speaker__photo {
+        width: 12rem;
     }
 }
 

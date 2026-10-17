@@ -1,0 +1,104 @@
+{{- /*
+    Overrides themes/event/layouts/speakers/single.html: speaker photo, name, tagline,
+    biography and links, followed by the speaker's sessions newest first.
+*/ -}}
+{{ define "main" }}
+    {{- $speaker := . }}
+    {{- $sessions := slice }}
+    {{- range where site.RegularPages "Section" "sessions" }}
+        {{- if in .Params.speakerIds $speaker.Params.speakerId }}
+            {{- $sessions = $sessions | append . }}
+        {{- end }}
+    {{- end }}
+
+
+    <div class="section-container">
+        <section class="section lnam-speaker">
+            <div class="lnam-speaker__photo">
+                {{- with .Resources.GetMatch "avatar.*" }}
+                    {{- with .Fill "640x640 webp" }}
+                        <img src="{{ .RelPermalink }}" width="320" height="320" alt="{{ $speaker.Title }}" />
+                    {{- end }}
+                {{- else }}
+                    {{- with resources.Get "images/avatar-image-fallback.webp" }}
+                        <img src="{{ .RelPermalink }}" width="320" height="320" alt="" />
+                    {{- end }}
+                {{- end }}
+            </div>
+
+            <div class="lnam-speaker__details">
+                <p class="lnam-eyebrow">{{ T "speaker_page.eyebrow" }}</p>
+                <h1 class="heading heading--1 heading--embedded">{{ .Title }}</h1>
+                {{- with .Params.tagLine }}
+                    <p class="lnam-speaker__tagline">{{ . }}</p>
+                {{- end }}
+
+                {{- with .Content }}
+                    <div class="markdown lnam-speaker__biography">{{ . }}</div>
+                {{- end }}
+
+                {{- if or .Params.linkedinUrl .Params.xUrl .Params.company }}
+                    <ul class="lnam-speaker__links">
+                        {{- with .Params.linkedinUrl }}
+                            <li>
+                                <a class="lnam-speaker__link" href="{{ . }}" target="_blank" rel="noopener noreferrer external">
+                                    <span class="lnam-speaker__icon">{{ partial "graphics/social/linkedin.html" }}</span>
+                                    LinkedIn
+                                </a>
+                            </li>
+                        {{- end }}
+                        {{- with .Params.xUrl }}
+                            <li>
+                                <a class="lnam-speaker__link" href="{{ . }}" target="_blank" rel="noopener noreferrer external">
+                                    <span class="lnam-speaker__icon">{{ partial "graphics/social/x.html" }}</span>
+                                    X
+                                </a>
+                            </li>
+                        {{- end }}
+                        {{- with .Params.company }}
+                            <li>
+                                <a class="lnam-speaker__link" href="{{ . }}" target="_blank" rel="noopener noreferrer external">
+                                    <span class="lnam-speaker__icon">{{ partial "graphics/social/company.html" }}</span>
+                                    {{ T "speaker_page.website" }}
+                                </a>
+                            </li>
+                        {{- end }}
+                    </ul>
+                {{- end }}
+            </div>
+        </section>
+    </div>
+
+    {{- if gt (len $sessions) 0 }}
+        <div class="section-container section-container--dimmed">
+            <section class="section section--long">
+                <header class="lnam-section-header">
+                    <div>
+                        <p class="lnam-eyebrow">{{ T "speaker_page.sessions_eyebrow" }}</p>
+                        <h2 class="heading heading--2 heading--embedded">{{ T "speaker_page.sessions_heading" }}</h2>
+                    </div>
+                </header>
+
+                <ol class="lnam-agenda__list">
+                    {{- range sort $sessions "Params.startsAt" "desc" }}
+                        <li class="lnam-agenda__item lnam-agenda__item--dated">
+                            {{- if .Params.isScheduled }}
+                                <time class="lnam-agenda__time" datetime="{{ .Params.startsAt | time.Format "2006-01-02T15:04" }}">
+                                    {{- .Params.startsAt | time.Format "2 Jan 2006" -}}
+                                </time>
+                            {{- else }}
+                                <span class="lnam-agenda__time"></span>
+                            {{- end }}
+                            <div class="lnam-agenda__body">
+                                <a class="lnam-agenda__title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+                                {{- with .Params.room.name }}
+                                    <span class="lnam-agenda__speakers">{{ . }}</span>
+                                {{- end }}
+                            </div>
+                        </li>
+                    {{- end }}
+                </ol>
+            </section>
+        </div>
+    {{- end }}
+{{ end }}

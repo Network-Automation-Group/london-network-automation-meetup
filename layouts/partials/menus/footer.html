@@ -1,0 +1,18 @@
+{{- /* Overrides the theme footer menu so that links to other sites open in a new tab. */ -}}
+{{ $input := . }}
+
+
+<ul class="footer-menu">
+    {{- range $input.menu }}
+        <li>
+            <a
+                class="footer-menu__link"
+                href="{{ .URL }}"
+                {{- if strings.HasPrefix .URL "http" }}
+                    target="_blank" rel="noopener noreferrer external"
+                {{- end }}>
+                {{- or (T (printf "menu.%s" .Identifier)) .Name }}
+            </a>
+        </li>
+    {{- end }}
+</ul>
