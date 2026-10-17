@@ -1,0 +1,61 @@
+{{- /*
+    Overrides themes/event/layouts/home.html.
+
+    Sessionize holds sessions for every LNAM meetup, so the home page splits them by date:
+    sessions on startDate form the agenda of the next meetup, earlier sessions are listed
+    under previous meetups.
+*/ -}}
+{{- define "main" }}
+    {{- $event := site.Params.themes.event }}
+    {{- $eventStart := $event.startDate | time.AsTime }}
+    {{- $eventEnd := $eventStart.AddDate 0 0 1 }}
+
+    {{- $scheduledSessions := where (where site.RegularPages "Section" "sessions") "Params.isScheduled" true }}
+    {{- $nextSessions := where (where $scheduledSessions "Params.date" "ge" $eventStart) "Params.date" "lt" $eventEnd }}
+    {{- $pastTalks := where (where $scheduledSessions "Params.date" "lt" $eventStart) "Params.isServiceSession" false }}
+
+    {{- $nextTalks := where $nextSessions "Params.isServiceSession" false }}
+    {{- $speakerIds := slice }}
+    {{- range $nextTalks }}
+        {{- range .Params.speakerIds }}
+            {{- $speakerIds = $speakerIds | append . }}
+        {{- end }}
+    {{- end }}
+
+    {{- partial "sections/hero.html" (
+        dict
+        "event" $event
+        "numberOfTalks" (len $nextTalks)
+        "numberOfSpeakers" (len (uniq $speakerIds))
+        )
+    }}
+
+    {{- partial "sections/agenda.html" (
+        dict
+        "sessions" (sort $nextSessions "Params.startsAt")
+        "scheduleUrl" (site.GetPage "sessions").RelPermalink
+        )
+    }}
+
+    {{- partial "sections/sponsor-tiers.html" (
+        dict
+        "sponsors" $event.sponsors
+        "tiers" $event.sponsorTiers
+        "showHeading" true
+        )
+    }}
+
+    {{- partial "sections/past-meetups.html" (
+        dict
+        "groups" ($pastTalks.GroupByParamDate "date" "2006-01-02" "desc")
+        "scheduleUrl" (site.GetPage "sessions").RelPermalink
+        )
+    }}
+
+    {{- partial "sections/community.html" (
+        dict
+        "socialLinks" $event.socialLinks
+        "email" site.Params.contact.email
+        )
+    }}
+{{- end }}

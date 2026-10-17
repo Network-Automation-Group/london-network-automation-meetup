@@ -104,28 +104,37 @@ params:
         enableBanner: false
       socialLinks:
         linkedinUrl: https://www.linkedin.com/company/london-network-automation-meetup/
+        slackUrl: https://join.slack.com/t/net-automation-group/shared_invite/zt-3d1tvc1x2-emU7MwZbYU6~zNLbwE~rPA
       favicon: favicon.ico
       images:
         logo: logos/lnam.png
-        titleBackground: images/background.png
         location: images/location.jpg
+      # Sponsors are grouped by tier on the home and sponsors pages, in the order of sponsorTiers.
+      sponsorTiers:
+        - id: gold
+          name: Gold sponsor
+        - id: silver
+          name: Silver sponsors
       sponsors:
-        - logo: aws.png
-          url: https://aws.amazon.com/
-          name: AWS
+        - logo: infoblox.svg
+          url: https://www.infoblox.com/
+          name: Infoblox
+          tier: gold
+        - logo: itential.png
+          url: https://www.itential.com/?utm_source=london-na-meetup&utm_medium=event
+          name: Itential
+          tier: silver
         - logo: opsmill.svg
           url: https://opsmill.com/
           name: OpsMill
-        - logo: packetcoders.png
-          url: https://www.packetcoders.io/
-          name: Packet Coders
+          tier: silver
       organizers: pete-crocker
       colors:
-          primaryLighter: '#327EB0'
-          primary: '#327EB0'
-          primaryDarker: '#216490'
-          primaryDarkest: '#216490'
-          secondary: '#A8ACB0'
-          secondaryDarker: '#A8ACB0'
-          track: '#015a57'
-          shadow: '#a6afc366'
+          primaryLighter: '#2F6FC8'
+          primary: '#004FB2'
+          primaryDarker: '#003C88'
+          primaryDarkest: '#0B1220'
+          secondary: '#F5F7FA'
+          secondaryDarker: '#5B6472'
+          track: '#004FB2'
+          shadow: '#0B12201F'

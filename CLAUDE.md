@@ -58,7 +58,7 @@ cd themes/event && npx prettier --write .
   - Contains theme assets, layouts, styles, tests (playwright.config.ts), and linting config (eslint.config.js)
 - **content/**: Event-specific markdown pages (about.md, code-of-conduct.md, location.md)
 - **assets/**: Site-specific assets (logos/lnam.png, images/background.png) - processed by Hugo pipelines
-- **static/**: Static files served as-is (aws.png sponsor logo, favicon.ico, slack.png)
+- **static/**: Static files served as-is (sponsor logos, favicon.ico, slack.png, fonts/ with self-hosted Geist and Geist Mono)
 - **layouts/**: Custom layout overrides for the theme (partials/, _default/, sessions/)
 - **data/**: Empty - dynamic data fetched from Sessionize API during build
 - **i18n/**: Internationalization overrides (currently en.yaml)
@@ -109,6 +109,9 @@ See `themes/event/hugo.yaml` for all available configuration options and their d
 - `params.themes.event.startDate` and `endDate`
 - `params.themes.event.callToAction.other.url` - Ticket registration URL
 - Event address and map details
+- `params.themes.event.sponsors` - each sponsor has a `tier` (`gold` or `silver`) matching an `id` in `sponsorTiers`; logos live in `static/`
+
+**Home page:** `layouts/home.html` overrides the theme. It splits Sessionize sessions by date: sessions on `startDate` form the agenda, earlier ones are listed under previous meetups.
 
 **Session/speaker content updates:**
 Since the site pulls data from Sessionize API, content updates happen by:

@@ -1,0 +1,6 @@
+{{- /* Small LNAM logo shown next to the "LNAM" text in the header and sidebar. */ -}}
+{{- with resources.Get site.Params.themes.event.images.logo }}
+    {{- with .Resize "96x webp" }}
+        <img class="brand-mark" src="{{ .RelPermalink }}" width="48" height="48" alt="" aria-hidden="true" />
+    {{- end }}
+{{- end }}
