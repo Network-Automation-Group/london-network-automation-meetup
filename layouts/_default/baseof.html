@@ -39,19 +39,6 @@
         --color-track: {{- .Site.Params.themes.event.colors.track }};
         --color-shadow: {{- .Site.Params.themes.event.colors.shadow }};
       }
-      
-      /* Custom styling for header social links */
-      .page-header__social-links {
-        display: flex;
-        align-items: center;
-        margin-left: 1rem;
-      }
-      
-      .page-header__actions {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
     </style>
     </head>
 
@@ -87,26 +74,6 @@
                                 "menu" .Site.Menus.main
                                 "context" .
                                 "homeLabel" (strings.FirstUpper (or .Site.Params.themes.event.shortTitle .Site.Params.themes.event.title))
-                                )
-                            }}
-                        </div>
-                    </div>
-
-                    <!-- Actions container for CTA button and social links -->
-                    <div class="page-header__actions">
-                        {{- partial "cta/button.html" (
-                            dict
-                            "eventbriteId" .Site.Params.themes.event.callToAction.eventbrite.eventId
-                            "ctaUrl" .Site.Params.themes.event.callToAction.other.url
-                            )
-                        }}
-                        
-                        <!-- Social links moved to header -->
-                        <div class="page-header__social-links">
-                            {{- partial "social-links.html" (
-                                dict
-                                "linkedinUrl" .Site.Params.themes.event.socialLinks.linkedinUrl
-                                "linkClass" "page-header__social-link"
                                 )
                             }}
                         </div>
@@ -225,18 +192,28 @@
                             {{ end }}
                         </select>
                     {{ end }}
-                    <!-- LinkedIn button removed from footer -->
+                    <a class="lnam-footer__brand" href="{{ site.Home.RelPermalink }}">
+                        {{- partial "brand-mark.html" }}
+                        {{ .Site.Params.themes.event.title }}
+                    </a>
                 </div>
 
                 {{- partial "menus/footer.html" (dict "menu" site.Menus.footer) }}
 
 
-                <div class="page-footer-section__end">
-                    <!-- {{- partial "elements/made-by-medialesson.html" (
+                <div class="lnam-footer__actions">
+                    {{- partial "social-links.html" (
                         dict
-                        "linkClass" "page-footer-section__made-by-link"
+                        "linkedinUrl" .Site.Params.themes.event.socialLinks.linkedinUrl
+                        "linkClass" "lnam-footer__social-link"
                         )
-                    }} -->
+                    }}
+                    {{- partial "cta/button.html" (
+                        dict
+                        "eventbriteId" .Site.Params.themes.event.callToAction.eventbrite.eventId
+                        "ctaUrl" .Site.Params.themes.event.callToAction.other.url
+                        )
+                    }}
                 </div>
             </section>
         </footer>

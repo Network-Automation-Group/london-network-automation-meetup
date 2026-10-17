@@ -51,11 +51,4 @@
         "scheduleUrl" (site.GetPage "sessions").RelPermalink
         )
     }}
-
-    {{- partial "sections/community.html" (
-        dict
-        "socialLinks" $event.socialLinks
-        "email" site.Params.contact.email
-        )
-    }}
 {{- end }}

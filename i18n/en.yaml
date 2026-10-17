@@ -1,6 +1,7 @@
 menu.imprint: Imprint
 menu.privacy: Privacy Policy
 menu.about: About
+menu.call_for_speakers: Call for Speakers
 # cta_banner.message: Get your free ticket now!
 
 hero.eyebrow: Next meetup
@@ -24,7 +25,7 @@ past_meetups.eyebrow: Archive
 past_meetups.heading: Previous meetups
 past_meetups.all: All sessions
 
-community.eyebrow: Community
-community.heading: Stay in touch
-community.text: Follow LNAM on LinkedIn for meetup announcements, or email the organisers.
-community.linkedin: Follow on LinkedIn
+speaker_page.eyebrow: Speaker
+speaker_page.website: Website
+speaker_page.sessions_eyebrow: Sessions
+speaker_page.sessions_heading: Talks at LNAM
